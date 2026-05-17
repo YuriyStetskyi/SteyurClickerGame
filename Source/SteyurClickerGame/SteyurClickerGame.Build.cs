@@ -12,12 +12,17 @@ public class SteyurClickerGame : ModuleRules
 
 		PrivateDependencyModuleNames.AddRange(new string[] {  });
 
-		// Uncomment if you are using Slate UI
-		// PrivateDependencyModuleNames.AddRange(new string[] { "Slate", "SlateCore" });
-		
-		// Uncomment if you are using online features
-		// PrivateDependencyModuleNames.Add("OnlineSubsystem");
+        //PublicIncludePaths.AddRange(new string[] { "SteyurClickerGame/Public/Source/SteyurClickerGame/Core" });
+        //PrivateIncludePaths.AddRange(new string[] { "SteyurClickerGame/Private/Source/SteyurClickerGame/Core" });
 
-		// To include OnlineSubsystemSteam, add it to the plugins section in your uproject file with the Enabled attribute set to true
-	}
+        PublicIncludePaths.AddRange(new string[] { "SteyurClickerGame", "SteyurClickerGame/Core" });
+
+        // Uncomment if you are using Slate UI
+        // PrivateDependencyModuleNames.AddRange(new string[] { "Slate", "SlateCore" });
+
+        // Uncomment if you are using online features
+        // PrivateDependencyModuleNames.Add("OnlineSubsystem");
+
+        // To include OnlineSubsystemSteam, add it to the plugins section in your uproject file with the Enabled attribute set to true
+    }
 }
