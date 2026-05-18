@@ -1,7 +1,10 @@
-// // Copyright (c) 2025 Yuriy "Steyur" Stetskyi - MIT License. Strategy Clicker Goblins
+// Copyright (c) 2025 Yuriy "Steyur" Stetskyi - MIT License. Strategy Clicker Goblins
 
 
 #include "Character/SCGPlayerCharacter.h"
+#include "Core/SCGPlayerState.h"
+#include "Controller/SCGPlayerController.h"
+#include "UI/HUD/SCGHUD.h"
 
 // Sets default values
 ASCGPlayerCharacter::ASCGPlayerCharacter()
@@ -18,6 +21,13 @@ void ASCGPlayerCharacter::BeginPlay()
 	
 }
 
+void ASCGPlayerCharacter::PossessedBy(AController* NewController)
+{
+    Super::PossessedBy(NewController);
+
+    InitializeOverlay();
+}
+
 // Called every frame
 void ASCGPlayerCharacter::Tick(float DeltaTime)
 {
@@ -30,5 +40,18 @@ void ASCGPlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInput
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 
+}
+
+void ASCGPlayerCharacter::InitializeOverlay()
+{
+    ASCGPlayerState* const PS = GetPlayerState<ASCGPlayerState>();
+    if (!PS) return;
+
+    ASCGPlayerController* const PC = Cast<ASCGPlayerController>(GetController());
+    if (!PC) return;
+
+    ASCGHUD* const HUD = Cast<ASCGHUD>(PC->GetHUD());
+
+    HUD->InitOverlay(PC, PS);
 }
 

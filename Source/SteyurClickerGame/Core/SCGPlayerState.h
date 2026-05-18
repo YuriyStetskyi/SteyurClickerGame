@@ -3,14 +3,14 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "GameFramework/PlayerController.h"
-#include "SCGPlayerController.generated.h"
+#include "GameFramework/PlayerState.h"
+#include "SCGPlayerState.generated.h"
 
 /**
  * 
  */
 UCLASS()
-class STEYURCLICKERGAME_API ASCGPlayerController : public APlayerController
+class STEYURCLICKERGAME_API ASCGPlayerState : public APlayerState
 {
 	GENERATED_BODY()
 	
