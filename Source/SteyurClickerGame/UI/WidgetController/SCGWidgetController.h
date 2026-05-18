@@ -29,7 +29,7 @@ struct FWidgetControllerParams
 /**
  * 
  */
-UCLASS()
+UCLASS(BlueprintType, Blueprintable)
 class STEYURCLICKERGAME_API USCGWidgetController : public UObject
 {
 	GENERATED_BODY()
