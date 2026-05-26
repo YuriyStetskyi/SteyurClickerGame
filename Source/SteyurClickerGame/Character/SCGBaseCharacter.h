@@ -4,25 +4,20 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
-#include "Character/SCGBaseCharacter.h"
-#include "SCGPlayerCharacter.generated.h"
+#include "SCGBaseCharacter.generated.h"
 
 UCLASS()
-class STEYURCLICKERGAME_API ASCGPlayerCharacter : public ASCGBaseCharacter
+class STEYURCLICKERGAME_API ASCGBaseCharacter : public ACharacter
 {
 	GENERATED_BODY()
 
 public:
 	// Sets default values for this character's properties
-	ASCGPlayerCharacter();
-
-
+	ASCGBaseCharacter();
 
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
-
-    virtual void PossessedBy(AController* NewController) override;
 
 public:	
 	// Called every frame
@@ -31,9 +26,4 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
-
-private:
-
-    /* Initializes game overlay including adding widgets to screen */
-    void InitializeOverlay();
 };
