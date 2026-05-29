@@ -7,6 +7,10 @@
 #include "Character/SCGBaseCharacter.h"
 #include "SCGPlayerCharacter.generated.h"
 
+class UCameraComponent;
+
+struct FInputActionValue;
+
 UCLASS()
 class STEYURCLICKERGAME_API ASCGPlayerCharacter : public ASCGBaseCharacter
 {
@@ -16,6 +20,10 @@ public:
 	// Sets default values for this character's properties
 	ASCGPlayerCharacter();
 
+    void HorizontalMovement(const FInputActionValue& InputActionValue);
+    void VerticalMovement(const FInputActionValue& InputActionValue);
+    void CameraMovement(const FInputActionValue& InputActionValue);
+    void ChangeMovementSpeed(const FInputActionValue& InputActionValue);
 
 
 protected:
@@ -23,6 +31,10 @@ protected:
 	virtual void BeginPlay() override;
 
     virtual void PossessedBy(AController* NewController) override;
+
+    UPROPERTY(EditDefaultsOnly, Category = "Components")
+    UCameraComponent* CameraComponent;
+
 
 public:	
 	// Called every frame

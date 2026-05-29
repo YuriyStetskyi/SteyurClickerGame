@@ -6,6 +6,8 @@
 #include "GameFramework/PlayerController.h"
 #include "SCGPlayerController.generated.h"
 
+class UInputMappingContext;
+class USCGInputActions;
 /**
  * 
  */
@@ -22,7 +24,8 @@ protected:
     UPROPERTY(EditDefaultsOnly, Category = "Input")
     UInputMappingContext* DefaultMappingContext;
 
-
+    UPROPERTY(EditDefaultsOnly, Category = "Input")
+    USCGInputActions* InputActions;
 private:
 
     /* Sets up enhanced input ONCE on posession of character */

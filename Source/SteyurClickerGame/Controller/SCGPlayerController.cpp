@@ -5,6 +5,8 @@
 #include "EnhancedInputSubsystems.h"
 #include "Character/SCGPlayerCharacter.h"
 #include "EnhancedInputComponent.h"
+#include "InputMappingContext.h"
+#include "Data/SCGInputActions.h"
 
 void ASCGPlayerController::OnPossess(APawn* aPawn)
 {
@@ -36,5 +38,10 @@ void ASCGPlayerController::SetupInputActions(APawn* const ControlledPawn)
     UEnhancedInputComponent* const EnhancedInputComponent = Cast<UEnhancedInputComponent>(InputComponent);
     if (!EnhancedInputComponent) return;
 
-    EnhancedInputComponent->bind
+    if (!InputActions) return;
+
+    EnhancedInputComponent->BindAction(InputActions->HorizontalMovement, ETriggerEvent::Triggered, PlayerCharacter, &ASCGPlayerCharacter::HorizontalMovement);
+    EnhancedInputComponent->BindAction(InputActions->VerticalMovement, ETriggerEvent::Triggered, PlayerCharacter, &ASCGPlayerCharacter::VerticalMovement);
+    EnhancedInputComponent->BindAction(InputActions->CameraMovement, ETriggerEvent::Triggered, PlayerCharacter, &ASCGPlayerCharacter::CameraMovement);
+    EnhancedInputComponent->BindAction(InputActions->ChangeMovementSpeed, ETriggerEvent::Triggered, PlayerCharacter, &ASCGPlayerCharacter::ChangeMovementSpeed);
 }
