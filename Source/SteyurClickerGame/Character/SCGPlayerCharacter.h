@@ -8,6 +8,8 @@
 #include "SCGPlayerCharacter.generated.h"
 
 class UCameraComponent;
+class UCapsuleComponent;
+class USCGDAPlayerControlsValues;
 
 struct FInputActionValue;
 
@@ -35,6 +37,8 @@ protected:
     UPROPERTY(EditDefaultsOnly, Category = "Components")
     UCameraComponent* CameraComponent;
 
+    UPROPERTY(EditDefaultsOnly, Category = "Data")
+    USCGDAPlayerControlsValues* PlayerControlsData;
 
 public:	
 	// Called every frame
@@ -48,4 +52,12 @@ private:
 
     /* Initializes game overlay including adding widgets to screen */
     void InitializeOverlay();
+
+    /* Update Acceleration, Deceleration, Fly speed etc.*/
+    void UpdateFlyingProperties();
+
+    void SetupMovement();
+
+    UPROPERTY(VisibleAnywhere, Category = "Movement")
+    int32 CurrentFlySpeed;
 };

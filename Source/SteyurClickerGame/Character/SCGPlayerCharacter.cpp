@@ -7,6 +7,9 @@
 #include "UI/HUD/SCGHUD.h"
 #include <InputActionValue.h>
 #include "Camera/CameraComponent.h"
+#include "Data/SCGDAPlayerControlsValues.h"
+#include "GameFramework/CharacterMovementComponent.h"
+
 
 // Sets default values
 ASCGPlayerCharacter::ASCGPlayerCharacter()
@@ -43,13 +46,22 @@ void ASCGPlayerCharacter::CameraMovement(const FInputActionValue& InputActionVal
 
 void ASCGPlayerCharacter::ChangeMovementSpeed(const FInputActionValue& InputActionValue)
 {
+    /* Fly speed = CurrentFlySpeed + (how much changed * Speed Change interval) */
+    float SpeedChangeValue = InputActionValue.Get<float>();
+    int32 CFlySpeed = CurrentFlySpeed + (SpeedChangeValue * PlayerControlsData->FlySpeedModificationInterval);
+    CurrentFlySpeed = FMath::Clamp(CFlySpeed,
+        PlayerControlsData->MinFlySpeed,
+        PlayerControlsData->MaxFlySpeed);
 
+    UpdateFlyingProperties();
 }
 
 // Called when the game starts or when spawned
 void ASCGPlayerCharacter::BeginPlay()
 {
 	Super::BeginPlay();
+
+    SetupMovement();
 }
 
 void ASCGPlayerCharacter::PossessedBy(AController* NewController)
@@ -84,5 +96,25 @@ void ASCGPlayerCharacter::InitializeOverlay()
     ASCGHUD* const HUD = Cast<ASCGHUD>(PC->GetHUD());
 
     HUD->InitOverlay(PC, PS);
+}
+
+void ASCGPlayerCharacter::UpdateFlyingProperties()
+{
+    UCharacterMovementComponent* const MovementComponent = GetCharacterMovement();
+    if (!MovementComponent) return;
+
+    MovementComponent->MaxAcceleration = CurrentFlySpeed * PlayerControlsData->MaxAccelerationModifier;
+    MovementComponent->MaxFlySpeed = CurrentFlySpeed;
+
+    int32 BDFlying = CurrentFlySpeed * PlayerControlsData->BreakingDecelerationModifier;
+    MovementComponent->BrakingDecelerationFlying = FMath::Clamp(BDFlying, 
+        PlayerControlsData->MinBreakingDeceleration, 
+        PlayerControlsData->MaxBreakingDeceleration); 
+}
+
+void ASCGPlayerCharacter::SetupMovement()
+{
+    CurrentFlySpeed = PlayerControlsData->StartingFlySpeed;
+    UpdateFlyingProperties(); //once setup on begin play, then called when changed movement speed etc.
 }
 
