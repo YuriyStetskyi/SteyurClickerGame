@@ -54,6 +54,7 @@ void ASCGPlayerCharacter::ChangeMovementSpeed(const FInputActionValue& InputActi
         PlayerControlsData->MaxFlySpeed);
 
     UpdateFlyingProperties();
+    Tags;
 }
 
 // Called when the game starts or when spawned
