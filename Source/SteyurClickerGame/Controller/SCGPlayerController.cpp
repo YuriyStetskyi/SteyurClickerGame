@@ -18,6 +18,7 @@ void ASCGPlayerController::OnPossess(APawn* aPawn)
 
 void ASCGPlayerController::SetupEnhancedInput()
 {
+    DefaultMappingContext = FreeCamMappingContext;
     if (!IsLocalController() || !DefaultMappingContext) return;
 
     ULocalPlayer* const LocalPlayer = GetLocalPlayer();
@@ -44,4 +45,5 @@ void ASCGPlayerController::SetupInputActions(APawn* const ControlledPawn)
     EnhancedInputComponent->BindAction(InputActions->VerticalMovement, ETriggerEvent::Triggered, PlayerCharacter, &ASCGPlayerCharacter::VerticalMovement);
     EnhancedInputComponent->BindAction(InputActions->CameraMovement, ETriggerEvent::Triggered, PlayerCharacter, &ASCGPlayerCharacter::CameraMovement);
     EnhancedInputComponent->BindAction(InputActions->ChangeMovementSpeed, ETriggerEvent::Triggered, PlayerCharacter, &ASCGPlayerCharacter::ChangeMovementSpeed);
+    EnhancedInputComponent->BindAction(InputActions->ToggleFreeCam, ETriggerEvent::Started, PlayerCharacter, &ASCGPlayerCharacter::ToggleFreeCam);
 }

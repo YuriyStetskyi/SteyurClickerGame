@@ -22,11 +22,17 @@ public:
 	// Sets default values for this character's properties
 	ASCGPlayerCharacter();
 
+    // Called every frame
+    virtual void Tick(float DeltaTime) override;
+
+    // Called to bind functionality to input
+    virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+
     void HorizontalMovement(const FInputActionValue& InputActionValue);
     void VerticalMovement(const FInputActionValue& InputActionValue);
     void CameraMovement(const FInputActionValue& InputActionValue);
     void ChangeMovementSpeed(const FInputActionValue& InputActionValue);
-
+    void ToggleFreeCam(const FInputActionValue& InputActionValue);
 
 protected:
 	// Called when the game starts or when spawned
@@ -40,13 +46,8 @@ protected:
     UPROPERTY(EditDefaultsOnly, Category = "Data")
     USCGDAPlayerControlsValues* PlayerControlsData;
 
-public:	
-	// Called every frame
-	virtual void Tick(float DeltaTime) override;
-
-	// Called to bind functionality to input
-	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
-
+    UPROPERTY(EditDefaultsOnly, Category = "Miscellaneous")
+    FName DefaultCameraLocationTag;
 
 private:
 
@@ -57,6 +58,10 @@ private:
     void UpdateFlyingProperties();
 
     void SetupMovement();
+
+    /* Helper functions */
+
+    void TeleportCameraToDefaultSpot();
 
     UPROPERTY(VisibleAnywhere, Category = "Movement")
     int32 CurrentFlySpeed;

@@ -17,15 +17,21 @@ class STEYURCLICKERGAME_API ASCGPlayerController : public APlayerController
 	GENERATED_BODY()
 	
 public:
+    UPROPERTY(VisibleDefaultsOnly, Category = "Input")
+    UInputMappingContext* DefaultMappingContext;
+
+    UPROPERTY(EditDefaultsOnly, Category = "Input")
+    UInputMappingContext* FreeCamMappingContext;
+
+    UPROPERTY(EditDefaultsOnly, Category = "Input")
+    UInputMappingContext* LockedMappingContext;
+
+    UPROPERTY(EditDefaultsOnly, Category = "Input")
+    USCGInputActions* InputActions;
 
 protected:
     virtual void OnPossess(APawn* aPawn) override;
 
-    UPROPERTY(EditDefaultsOnly, Category = "Input")
-    UInputMappingContext* DefaultMappingContext;
-
-    UPROPERTY(EditDefaultsOnly, Category = "Input")
-    USCGInputActions* InputActions;
 private:
 
     /* Sets up enhanced input ONCE on posession of character */

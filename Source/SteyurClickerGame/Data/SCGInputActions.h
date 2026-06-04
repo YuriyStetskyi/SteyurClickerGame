@@ -28,4 +28,7 @@ public:
 
     UPROPERTY(EditAnywhere, Category = "Input Actions")
     UInputAction* ChangeMovementSpeed;
+
+    UPROPERTY(EditAnywhere, Category = "Input Actions")
+    UInputAction* ToggleFreeCam;
 };

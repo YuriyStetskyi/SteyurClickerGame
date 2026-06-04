@@ -9,6 +9,9 @@
 #include "Camera/CameraComponent.h"
 #include "Data/SCGDAPlayerControlsValues.h"
 #include "GameFramework/CharacterMovementComponent.h"
+#include "EnhancedInputComponent.h"
+#include "EnhancedInputSubsystems.h"
+#include "Kismet/GameplayStatics.h"
 
 
 // Sets default values
@@ -54,7 +57,45 @@ void ASCGPlayerCharacter::ChangeMovementSpeed(const FInputActionValue& InputActi
         PlayerControlsData->MaxFlySpeed);
 
     UpdateFlyingProperties();
-    Tags;
+}
+
+void ASCGPlayerCharacter::ToggleFreeCam(const FInputActionValue& InputActionValue)
+{
+    ASCGPlayerController* const PlayerController = Cast<ASCGPlayerController>(GetController());
+    if (!PlayerController) return;
+
+    ULocalPlayer* LocalPlayer = PlayerController->GetLocalPlayer();
+    if (!LocalPlayer) return;
+
+    UEnhancedInputLocalPlayerSubsystem* const InputSubsystem = ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(LocalPlayer);
+    if (!InputSubsystem) return;
+
+    const bool IsFreeCam = InputSubsystem->HasMappingContext(PlayerController->FreeCamMappingContext);
+    
+    if (IsFreeCam)
+    {
+        InputSubsystem->RemoveMappingContext(PlayerController->FreeCamMappingContext);
+        InputSubsystem->AddMappingContext(PlayerController->LockedMappingContext, InputPriority);
+
+        TeleportCameraToDefaultSpot();
+    }
+    else
+    {
+        InputSubsystem->RemoveMappingContext(PlayerController->LockedMappingContext);
+        InputSubsystem->AddMappingContext(PlayerController->FreeCamMappingContext, InputPriority);
+    }
+}
+
+void ASCGPlayerCharacter::TeleportCameraToDefaultSpot()
+{
+    UWorld* World = GetWorld();
+    if (!World) return;
+
+    TArray<AActor*> DefaultCameraTransformActors;
+    UGameplayStatics::GetAllActorsWithTag(World, DefaultCameraLocationTag, DefaultCameraTransformActors);
+
+    if (DefaultCameraTransformActors.IsEmpty()) return;
+    SetActorTransform(DefaultCameraTransformActors[0]->GetTransform());
 }
 
 // Called when the game starts or when spawned
