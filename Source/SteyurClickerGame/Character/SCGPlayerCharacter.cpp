@@ -77,7 +77,7 @@ void ASCGPlayerCharacter::ToggleFreeCam(const FInputActionValue& InputActionValu
         InputSubsystem->RemoveMappingContext(PlayerController->FreeCamMappingContext);
         InputSubsystem->AddMappingContext(PlayerController->LockedMappingContext, InputPriority);
 
-        TeleportCameraToDefaultSpot();
+        TeleportCameraToDefaultSpot(PlayerController);
     }
     else
     {
@@ -86,7 +86,7 @@ void ASCGPlayerCharacter::ToggleFreeCam(const FInputActionValue& InputActionValu
     }
 }
 
-void ASCGPlayerCharacter::TeleportCameraToDefaultSpot()
+void ASCGPlayerCharacter::TeleportCameraToDefaultSpot(ASCGPlayerController* const PlayerController)
 {
     UWorld* World = GetWorld();
     if (!World) return;
@@ -95,7 +95,9 @@ void ASCGPlayerCharacter::TeleportCameraToDefaultSpot()
     UGameplayStatics::GetAllActorsWithTag(World, DefaultCameraLocationTag, DefaultCameraTransformActors);
 
     if (DefaultCameraTransformActors.IsEmpty()) return;
-    SetActorTransform(DefaultCameraTransformActors[0]->GetTransform());
+    SetActorLocation(DefaultCameraTransformActors[0]->GetActorLocation());
+    SetActorRotation(DefaultCameraTransformActors[0]->GetActorRotation());
+    PlayerController->SetControlRotation(DefaultCameraTransformActors[0]->GetActorRotation());
 }
 
 // Called when the game starts or when spawned

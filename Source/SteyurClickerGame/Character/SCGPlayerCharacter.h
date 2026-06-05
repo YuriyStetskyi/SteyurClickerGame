@@ -10,6 +10,7 @@
 class UCameraComponent;
 class UCapsuleComponent;
 class USCGDAPlayerControlsValues;
+class ASCGPlayerController;
 
 struct FInputActionValue;
 
@@ -61,7 +62,7 @@ private:
 
     /* Helper functions */
 
-    void TeleportCameraToDefaultSpot();
+    void TeleportCameraToDefaultSpot(ASCGPlayerController* const PlayerController);
 
     UPROPERTY(VisibleAnywhere, Category = "Movement")
     int32 CurrentFlySpeed;
