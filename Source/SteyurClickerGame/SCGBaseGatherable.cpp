@@ -2,6 +2,7 @@
 
 
 #include "SCGBaseGatherable.h"
+#include "Components/SCGResourceComponent.h"
 
 // Sets default values
 ASCGBaseGatherable::ASCGBaseGatherable()
@@ -11,6 +12,8 @@ ASCGBaseGatherable::ASCGBaseGatherable()
     
     Mesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Mesh"));
     Mesh->AttachToComponent(GetRootComponent(), FAttachmentTransformRules::KeepRelativeTransform);
+
+    Resource = CreateDefaultSubobject<USCGResourceComponent>(TEXT("Ore Resource"));
 }
 
 // Called when the game starts or when spawned

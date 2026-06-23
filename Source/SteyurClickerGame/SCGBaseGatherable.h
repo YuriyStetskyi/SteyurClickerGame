@@ -6,6 +6,8 @@
 #include "GameFramework/Actor.h"
 #include "SCGBaseGatherable.generated.h"
 
+class USCGResourceComponent;
+
 UCLASS()
 class STEYURCLICKERGAME_API ASCGBaseGatherable : public AActor
 {
@@ -21,6 +23,9 @@ protected:
 
     UPROPERTY(EditDefaultsOnly, Category = "Components")
     UStaticMeshComponent* Mesh;
+
+    UPROPERTY(EditDefaultsOnly, Category = "Components")
+    USCGResourceComponent* Resource;
 
 public:	
 	// Called every frame
