@@ -6,6 +6,7 @@
 #include "Components/ActorComponent.h"
 #include "SCGResourceComponent.generated.h"
 
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnResourceDepletedDelegate);
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class STEYURCLICKERGAME_API USCGResourceComponent : public UActorComponent
@@ -16,11 +17,9 @@ public:
 	// Sets default values for this component's properties
 	USCGResourceComponent();
 
-protected:
-	// Called when the game starts
-	virtual void BeginPlay() override;
+    UFUNCTION(BlueprintCallable)
+    void SetResource(const int32 NewResource);
 
-public:	
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
@@ -29,4 +28,12 @@ public:
 
     UPROPERTY(EditDefaultsOnly, Category = "Config")
     int32 Resource;
+
+    UPROPERTY(BlueprintAssignable, Category = "Delegates")
+    FOnResourceDepletedDelegate OnResourceDepleted;
+
+protected:
+	// Called when the game starts
+	virtual void BeginPlay() override;
+
 };
