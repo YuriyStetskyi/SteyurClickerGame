@@ -16,13 +16,16 @@ struct FWidgetControllerParams
     GENERATED_BODY()
 
     FWidgetControllerParams();
-    FWidgetControllerParams(APlayerController* const PC, APlayerState* const PS);
+    FWidgetControllerParams(APlayerController* const PC, APlayerState* const PS, AActor* const OA);
 
     UPROPERTY(BlueprintReadOnly, Category = "Widget Controller")
     APlayerController* PlayerController;
 
     UPROPERTY(BlueprintReadOnly, Category = "Widget Controller")
     APlayerState* PlayerState;
+
+    UPROPERTY(BlueprintReadOnly, Category = "Widget Controller")
+    AActor* OwningActor;
 };
 
 
@@ -44,14 +47,14 @@ public:
         Called ONCE when initializing starting values of Widget visible variables.
         Override in inherited class.
     */
-    void BroadcastInitialValues();
+    virtual void BroadcastInitialValues();
 
     /*
         Called ONCE when binding appropriate functions to delegates responsible for
         altering Widget visible variables.
         Override in inherited class.
     */
-    void BindCallbacksToDependencies();
+    virtual void BindCallbacksToDependencies();
 
 protected:
 
@@ -60,4 +63,7 @@ protected:
 
     UPROPERTY(BlueprintReadOnly, Category = "WidgetController")
     APlayerState* PlayerState;
+
+    UPROPERTY(BlueprintReadOnly, Category = "WidgetController")
+    AActor* OwningActor;
 };

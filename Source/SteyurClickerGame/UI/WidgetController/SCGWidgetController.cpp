@@ -6,12 +6,14 @@
 FWidgetControllerParams::FWidgetControllerParams()
     : PlayerController(nullptr)
     , PlayerState(nullptr)
+    , OwningActor(nullptr)
 {
 }
 
-FWidgetControllerParams::FWidgetControllerParams(APlayerController* const PC, APlayerState* const PS)
+FWidgetControllerParams::FWidgetControllerParams(APlayerController* const PC, APlayerState* const PS, AActor* const OA)
     : PlayerController(PC)
     , PlayerState(PS)
+    , OwningActor(OA)
 {
 }
 
@@ -19,12 +21,15 @@ void USCGWidgetController::SetWidgetControllerParams(const FWidgetControllerPara
 {
     PlayerController = WCParams.PlayerController;
     PlayerState = WCParams.PlayerState;
+    OwningActor = WCParams.OwningActor;
 }
 
 void USCGWidgetController::BroadcastInitialValues()
 {
+
 }
 
 void USCGWidgetController::BindCallbacksToDependencies()
 {
+
 }

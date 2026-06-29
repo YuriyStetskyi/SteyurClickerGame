@@ -139,7 +139,7 @@ void ASCGPlayerCharacter::InitializeOverlay()
 
     ASCGHUD* const HUD = Cast<ASCGHUD>(PC->GetHUD());
 
-    HUD->InitOverlay(PC, PS);
+    HUD->InitOverlay(PC, PS, this);
 }
 
 void ASCGPlayerCharacter::UpdateFlyingProperties()

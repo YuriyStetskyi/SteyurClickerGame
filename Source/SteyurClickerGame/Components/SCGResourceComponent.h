@@ -6,7 +6,8 @@
 #include "Components/ActorComponent.h"
 #include "SCGResourceComponent.generated.h"
 
-DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnResourceDepletedDelegate);
+DECLARE_MULTICAST_DELEGATE_OneParam(FOnResourceSetDelegate, int32);
+DECLARE_MULTICAST_DELEGATE(FOnResourceDepletedDelegate);
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class STEYURCLICKERGAME_API USCGResourceComponent : public UActorComponent
@@ -29,7 +30,8 @@ public:
     UPROPERTY(EditDefaultsOnly, Category = "Config")
     int32 Resource;
 
-    UPROPERTY(BlueprintAssignable, Category = "Delegates")
+    FOnResourceSetDelegate OnResourceSet;
+
     FOnResourceDepletedDelegate OnResourceDepleted;
 
 protected:

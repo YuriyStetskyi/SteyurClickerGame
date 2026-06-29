@@ -23,7 +23,7 @@ public:
     UPROPERTY()
     USCGUserWidget* OverlayWidget;
     
-    void InitOverlay(APlayerController* const PC, APlayerState* const PS);
+    void InitOverlay(APlayerController* const PC, APlayerState* const PS, AActor* const OA);
 
     USCGOverlayWidgetController* GetOverlayWidgetController(const FWidgetControllerParams& WCParams);
 	

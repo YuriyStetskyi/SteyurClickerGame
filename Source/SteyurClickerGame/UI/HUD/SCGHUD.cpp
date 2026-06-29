@@ -6,7 +6,7 @@
 #include "UI/Widget/SCGUserWidget.h"
 #include "UI/WidgetController/SCGOverlayWidgetController.h"
 
-void ASCGHUD::InitOverlay(APlayerController* const PC, APlayerState* const PS)
+void ASCGHUD::InitOverlay(APlayerController* const PC, APlayerState* const PS, AActor* const OA)
 {
     UWorld* const CurrentWorld = GetWorld();
     if (!CurrentWorld) return;
@@ -17,7 +17,7 @@ void ASCGHUD::InitOverlay(APlayerController* const PC, APlayerState* const PS)
     OverlayWidget = Cast<USCGUserWidget>(Widget);
     if (!OverlayWidget) return;
 
-    const FWidgetControllerParams WidgetControllerParams(PC, PS);
+    const FWidgetControllerParams WidgetControllerParams(PC, PS, OA);
     USCGOverlayWidgetController* const WidgetController = GetOverlayWidgetController(WidgetControllerParams);
 
     OverlayWidget->SetWidgetController(WidgetController);

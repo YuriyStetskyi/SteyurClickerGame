@@ -28,7 +28,10 @@ void USCGResourceComponent::TickComponent(float DeltaTime, ELevelTick TickType, 
 
 void USCGResourceComponent::SetResource(const int32 NewResource)
 {
-    Resource = FMath::Clamp(Resource, 0, MaxResource);
+    int32 ClampedResource = FMath::Clamp(NewResource, 0, MaxResource);
+
+    Resource = ClampedResource;
+    OnResourceSet.Broadcast(ClampedResource);
 
     if (Resource == 0) OnResourceDepleted.Broadcast();
 }
