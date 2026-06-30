@@ -18,6 +18,10 @@ public:
     UFUNCTION(BlueprintCallable)
     void SetWidgetController(UObject* InWidgetController);
 
+    /* Entry Point for BP logic in each widget */
+    UFUNCTION(BlueprintNativeEvent)
+    void WidgetControllerSet();
+
     UPROPERTY(BlueprintReadOnly)
     UObject* WidgetController;
 };

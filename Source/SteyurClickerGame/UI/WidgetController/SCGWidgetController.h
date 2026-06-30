@@ -10,7 +10,7 @@
     Params struct that each Widget controller uses to initialize itself.
     Includes most important classes Widgets might need to access to work properly
 */
-USTRUCT(BlueprintType)
+USTRUCT(BlueprintType, Blueprintable)
 struct FWidgetControllerParams
 {
     GENERATED_BODY()
@@ -18,13 +18,13 @@ struct FWidgetControllerParams
     FWidgetControllerParams();
     FWidgetControllerParams(APlayerController* const PC, APlayerState* const PS, AActor* const OA);
 
-    UPROPERTY(BlueprintReadOnly, Category = "Widget Controller")
+    UPROPERTY(BlueprintReadWrite, Category = "Widget Controller")
     APlayerController* PlayerController;
 
-    UPROPERTY(BlueprintReadOnly, Category = "Widget Controller")
+    UPROPERTY(BlueprintReadWrite, Category = "Widget Controller")
     APlayerState* PlayerState;
 
-    UPROPERTY(BlueprintReadOnly, Category = "Widget Controller")
+    UPROPERTY(BlueprintReadWrite, Category = "Widget Controller")
     AActor* OwningActor;
 };
 
@@ -47,6 +47,7 @@ public:
         Called ONCE when initializing starting values of Widget visible variables.
         Override in inherited class.
     */
+    UFUNCTION(BlueprintCallable)
     virtual void BroadcastInitialValues();
 
     /*
@@ -54,16 +55,17 @@ public:
         altering Widget visible variables.
         Override in inherited class.
     */
+    UFUNCTION(BlueprintCallable)
     virtual void BindCallbacksToDependencies();
 
 protected:
 
-    UPROPERTY(BlueprintReadOnly, Category = "WidgetController")
+    UPROPERTY(BlueprintReadWrite, Category = "WidgetController")
     APlayerController* PlayerController;
 
-    UPROPERTY(BlueprintReadOnly, Category = "WidgetController")
+    UPROPERTY(BlueprintReadWrite, Category = "WidgetController")
     APlayerState* PlayerState;
 
-    UPROPERTY(BlueprintReadOnly, Category = "WidgetController")
+    UPROPERTY(BlueprintReadWrite, Category = "WidgetController")
     AActor* OwningActor;
 };

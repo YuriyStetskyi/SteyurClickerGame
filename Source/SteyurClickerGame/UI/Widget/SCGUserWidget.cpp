@@ -6,4 +6,10 @@
 void USCGUserWidget::SetWidgetController(UObject* InWidgetController)
 {
     WidgetController = InWidgetController;
+    WidgetControllerSet();
+}
+
+void USCGUserWidget::WidgetControllerSet_Implementation()
+{
+
 }
