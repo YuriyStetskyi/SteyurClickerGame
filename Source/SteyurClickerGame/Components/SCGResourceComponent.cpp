@@ -5,13 +5,12 @@
 
 // Sets default values for this component's properties
 USCGResourceComponent::USCGResourceComponent()
-    : MaxResource(100)
+    : MaxResource(100.0f)
     , Resource(MaxResource)
 {
 	PrimaryComponentTick.bCanEverTick = false;
 
 }
-
 
 // Called when the game starts
 void USCGResourceComponent::BeginPlay()
@@ -19,16 +18,15 @@ void USCGResourceComponent::BeginPlay()
 	Super::BeginPlay();
 }
 
-
 // Called every frame
 void USCGResourceComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 }
 
-void USCGResourceComponent::SetResource(const int32 NewResource)
+void USCGResourceComponent::SetResource(const float NewResource)
 {
-    int32 ClampedResource = FMath::Clamp(NewResource, 0, MaxResource);
+    float ClampedResource = FMath::Clamp(NewResource, 0.0f, MaxResource);
 
     Resource = ClampedResource;
     OnResourceSet.Broadcast(ClampedResource);

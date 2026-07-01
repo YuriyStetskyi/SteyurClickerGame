@@ -6,7 +6,7 @@
 #include "Components/ActorComponent.h"
 #include "SCGResourceComponent.generated.h"
 
-DECLARE_MULTICAST_DELEGATE_OneParam(FOnResourceSetDelegate, int32);
+DECLARE_MULTICAST_DELEGATE_OneParam(FOnResourceSetDelegate, float);
 DECLARE_MULTICAST_DELEGATE(FOnResourceDepletedDelegate);
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
@@ -19,16 +19,16 @@ public:
 	USCGResourceComponent();
 
     UFUNCTION(BlueprintCallable)
-    void SetResource(const int32 NewResource);
+    void SetResource(const float NewResource);
 
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
-    UPROPERTY(EditDefaultsOnly, Category = "Config")
-    int32 MaxResource;
+    UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Config")
+    float MaxResource;
 
-    UPROPERTY(EditDefaultsOnly, Category = "Config")
-    int32 Resource;
+    UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Config")
+    float Resource;
 
     FOnResourceSetDelegate OnResourceSet;
 

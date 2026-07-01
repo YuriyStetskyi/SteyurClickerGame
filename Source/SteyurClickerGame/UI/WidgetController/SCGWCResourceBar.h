@@ -6,7 +6,7 @@
 #include "UI/WidgetController/SCGWidgetController.h"
 #include "SCGWCResourceBar.generated.h"
 
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnResourceSetUIDelegate, int32, NewResource);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnResourceSetUIDelegate, float, NewResource);
 
 /**
  *  Widget Controller for Resource Bar Widget tied to Resource Component

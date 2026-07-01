@@ -58,8 +58,6 @@ public:
     UFUNCTION(BlueprintCallable)
     virtual void BindCallbacksToDependencies();
 
-protected:
-
     UPROPERTY(BlueprintReadWrite, Category = "WidgetController")
     APlayerController* PlayerController;
 

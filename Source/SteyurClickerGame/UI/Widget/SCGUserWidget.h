@@ -22,6 +22,6 @@ public:
     UFUNCTION(BlueprintNativeEvent)
     void WidgetControllerSet();
 
-    UPROPERTY(BlueprintReadOnly)
+    UPROPERTY(BlueprintReadWrite)
     UObject* WidgetController;
 };
