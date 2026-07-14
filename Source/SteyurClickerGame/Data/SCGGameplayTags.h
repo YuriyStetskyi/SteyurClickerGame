@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameplayTagContainer.h"
+
 /**
  * Singleton containing native Gameplay Tags
  */
