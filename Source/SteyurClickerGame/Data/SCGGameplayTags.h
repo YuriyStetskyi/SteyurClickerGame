@@ -19,12 +19,19 @@ public:
     static void InitializeNativeGameplayTags();
 
     /*
-    *   Character Attributes
+    *   Resources    
     */
 
     FGameplayTag Resource_Gatherable_Ore_Iron;
     FGameplayTag Resource_Gatherable_Ore_Gold;
     FGameplayTag Resource_Gatherable_Ore_Diamonds;
+
+    /*
+    *   Gameplay
+    */
+
+    FGameplayTag Gameplay_Interactable_Player;
+    FGameplayTag Gameplay_Interactable_GameEntity;
 
 private:
     /* Singleton instance. */

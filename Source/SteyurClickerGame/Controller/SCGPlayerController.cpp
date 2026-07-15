@@ -18,7 +18,7 @@ void ASCGPlayerController::OnPossess(APawn* aPawn)
 
 void ASCGPlayerController::SetupEnhancedInput()
 {
-    DefaultMappingContext = FreeCamMappingContext;
+    DefaultMappingContext = LockedMappingContext;
     if (!IsLocalController() || !DefaultMappingContext) return;
 
     ULocalPlayer* const LocalPlayer = GetLocalPlayer();
