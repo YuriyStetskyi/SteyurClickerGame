@@ -4,18 +4,22 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "GameplayTagContainer.h"
+#include "GameplayTagAssetInterface.h"
 #include "SCGBaseGatherable.generated.h"
 
 class USCGResourceComponent;
 
 UCLASS()
-class STEYURCLICKERGAME_API ASCGBaseGatherable : public AActor
+class STEYURCLICKERGAME_API ASCGBaseGatherable : public AActor, public IGameplayTagAssetInterface
 {
 	GENERATED_BODY()
 	
 public:	
 	// Sets default values for this actor's properties
 	ASCGBaseGatherable();
+
+    virtual void GetOwnedGameplayTags(FGameplayTagContainer& TagContainer) const override;
 
 protected:
 	// Called when the game starts or when spawned
@@ -26,6 +30,9 @@ protected:
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Components")
     USCGResourceComponent* Resource;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "GameplayTags")
+    FGameplayTagContainer GameplayTags;
 
 public:	
 	// Called every frame

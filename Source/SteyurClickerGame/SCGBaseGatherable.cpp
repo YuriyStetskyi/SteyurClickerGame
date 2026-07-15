@@ -16,6 +16,11 @@ ASCGBaseGatherable::ASCGBaseGatherable()
     Resource = CreateDefaultSubobject<USCGResourceComponent>(TEXT("Ore Resource"));
 }
 
+void ASCGBaseGatherable::GetOwnedGameplayTags(FGameplayTagContainer& TagContainer) const
+{
+    TagContainer = GameplayTags;
+}
+
 // Called when the game starts or when spawned
 void ASCGBaseGatherable::BeginPlay()
 {
