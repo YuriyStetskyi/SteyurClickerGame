@@ -34,6 +34,7 @@ public:
     void CameraMovement(const FInputActionValue& InputActionValue);
     void ChangeMovementSpeed(const FInputActionValue& InputActionValue);
     void ToggleFreeCam(const FInputActionValue& InputActionValue);
+    void LMBClicked(const FInputActionValue& InputActionValue);
 
 protected:
 	// Called when the game starts or when spawned

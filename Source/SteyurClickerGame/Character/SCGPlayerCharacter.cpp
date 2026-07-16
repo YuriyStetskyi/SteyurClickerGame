@@ -86,6 +86,11 @@ void ASCGPlayerCharacter::ToggleFreeCam(const FInputActionValue& InputActionValu
     }
 }
 
+void ASCGPlayerCharacter::LMBClicked(const FInputActionValue& InputActionValue)
+{
+    GEngine->AddOnScreenDebugMessage(-35125, 5.0f, FColor::Black, TEXT("LMB CLICKED"));
+}
+
 void ASCGPlayerCharacter::TeleportCameraToDefaultSpot(ASCGPlayerController* const PlayerController)
 {
     UWorld* World = GetWorld();

@@ -46,4 +46,5 @@ void ASCGPlayerController::SetupInputActions(APawn* const ControlledPawn)
     EnhancedInputComponent->BindAction(InputActions->CameraMovement, ETriggerEvent::Triggered, PlayerCharacter, &ASCGPlayerCharacter::CameraMovement);
     EnhancedInputComponent->BindAction(InputActions->ChangeMovementSpeed, ETriggerEvent::Triggered, PlayerCharacter, &ASCGPlayerCharacter::ChangeMovementSpeed);
     EnhancedInputComponent->BindAction(InputActions->ToggleFreeCam, ETriggerEvent::Started, PlayerCharacter, &ASCGPlayerCharacter::ToggleFreeCam);
+    EnhancedInputComponent->BindAction(InputActions->LeftMouseButton, ETriggerEvent::Completed, PlayerCharacter, &ASCGPlayerCharacter::LMBClicked);
 }
