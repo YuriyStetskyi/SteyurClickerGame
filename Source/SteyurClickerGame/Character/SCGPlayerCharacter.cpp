@@ -12,7 +12,8 @@
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
 #include "Kismet/GameplayStatics.h"
-
+#include "GameplayTagAssetInterface.h"
+#include "Data/SCGGameplayTags.h"
 
 // Sets default values
 ASCGPlayerCharacter::ASCGPlayerCharacter()
@@ -88,7 +89,26 @@ void ASCGPlayerCharacter::ToggleFreeCam(const FInputActionValue& InputActionValu
 
 void ASCGPlayerCharacter::LMBClicked(const FInputActionValue& InputActionValue)
 {
-    GEngine->AddOnScreenDebugMessage(-35125, 5.0f, FColor::Black, TEXT("LMB CLICKED"));
+    AController* const CurrentController = GetController();
+    if (!CurrentController) return;
+
+    ASCGPlayerController* const CurrentPlayerController = Cast<ASCGPlayerController>(CurrentController);
+    if (!CurrentPlayerController) return;
+
+    FHitResult Hit;
+
+    bool SuccessfullHit = CurrentPlayerController->GetHitResultUnderCursor(ECollisionChannel::ECC_Visibility, true, Hit);
+    if (!SuccessfullHit) return;
+
+    AActor* HitActor = Hit.GetActor();
+    if (!HitActor) return;
+
+    IGameplayTagAssetInterface* const ActorWithGameplayTags = Cast<IGameplayTagAssetInterface>(HitActor);
+    if (!ActorWithGameplayTags) return;
+
+    bool IsInteractable = ActorWithGameplayTags->HasMatchingGameplayTag(FSCGGameplayTags::Get().Gameplay_Interactable_Player);
+
+    GEngine->AddOnScreenDebugMessage(-35125, 1.0f, FColor::Black, TEXT("INTERACTABLE ACTOR FOUND"));
 }
 
 void ASCGPlayerCharacter::TeleportCameraToDefaultSpot(ASCGPlayerController* const PlayerController)
