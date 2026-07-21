@@ -5,13 +5,14 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include "GameplayTagContainer.h"
+#include "Interface/SCGInteractable.h"
 #include "GameplayTagAssetInterface.h"
 #include "SCGBaseGatherable.generated.h"
 
 class USCGResourceComponent;
 
 UCLASS()
-class STEYURCLICKERGAME_API ASCGBaseGatherable : public AActor, public IGameplayTagAssetInterface
+class STEYURCLICKERGAME_API ASCGBaseGatherable : public AActor, public IGameplayTagAssetInterface, public ISCGInteractable
 {
 	GENERATED_BODY()
 	
@@ -38,4 +39,5 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
+    virtual bool Interact(AActor* InteractionActor);
 };

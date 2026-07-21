@@ -14,6 +14,7 @@
 #include "Kismet/GameplayStatics.h"
 #include "GameplayTagAssetInterface.h"
 #include "Data/SCGGameplayTags.h"
+#include "Interface/SCGInteractable.h"
 
 // Sets default values
 ASCGPlayerCharacter::ASCGPlayerCharacter()
@@ -108,7 +109,15 @@ void ASCGPlayerCharacter::LMBClicked(const FInputActionValue& InputActionValue)
 
     bool IsInteractable = ActorWithGameplayTags->HasMatchingGameplayTag(FSCGGameplayTags::Get().Gameplay_Interactable_Player);
 
-    GEngine->AddOnScreenDebugMessage(-35125, 1.0f, FColor::Black, TEXT("INTERACTABLE ACTOR FOUND"));
+    if (IsInteractable)
+    {
+        ISCGInteractable* const InteractableActor = Cast<ISCGInteractable>(HitActor);
+        if (!InteractableActor) return;
+
+        InteractableActor->Interact(this);
+        GEngine->AddOnScreenDebugMessage(-35125, 1.0f, FColor::Black, TEXT("INTERACTABLE ACTOR FOUND"));
+    }
+
 }
 
 void ASCGPlayerCharacter::TeleportCameraToDefaultSpot(ASCGPlayerController* const PlayerController)

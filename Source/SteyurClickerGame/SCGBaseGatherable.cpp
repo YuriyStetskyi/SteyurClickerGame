@@ -3,6 +3,7 @@
 
 #include "SCGBaseGatherable.h"
 #include "Components/SCGResourceComponent.h"
+#include "Character/SCGPlayerCharacter.h"
 
 // Sets default values
 ASCGBaseGatherable::ASCGBaseGatherable()
@@ -34,5 +35,21 @@ void ASCGBaseGatherable::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+}
+
+bool ASCGBaseGatherable::Interact(AActor* InteractionActor)
+{
+    ASCGPlayerCharacter* const PlayerCharacter = Cast<ASCGPlayerCharacter>(InteractionActor);
+    if (PlayerCharacter)
+    {
+        // player logic
+        Resource->SetResource(Resource->Resource + 10);
+    }
+    else
+    {
+        // goblins logic
+    }
+
+    return false;
 }
 
